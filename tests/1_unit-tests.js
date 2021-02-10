@@ -23,28 +23,33 @@ suite('Unit Tests', function(){
     });
     
     test('Decimal Input', function(done) {
-      
-      //done();
+      let input = '32.5L'
+      assert.equal(convertHandler.getNum(input), 32.5)
+      done();
     });
     
     test('Fractional Input', function(done) {
-      
-      //done();
+      let input = '2/5L'
+      assert.equal(convertHandler.getNum(input), 0.4)
+      done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+      let input = '32.5/32.5L'
+      assert.equal(convertHandler.getNum(input), 1)
+      done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      let input = '32.5/2/4L'
+      assert.equal(convertHandler.getNum(input), 'invalid number')
+      done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      let input = '3a4L'
+      assert.isNotNumber(convertHandler.getNum(input))
+      done();
     }); 
     
   });
@@ -53,15 +58,16 @@ suite('Unit Tests', function(){
     
     test('For Each Valid Unit Inputs', function(done) {
       let input = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
-      input.forEach(function(ele) {
-        //assert
+      input.forEach(ele => {
+        assert.notEqual(convertHandler.getUnit(ele), 'invalid unit')
       });
       done();
     });
     
     test('Unknown Unit Input', function(done) {
-      
-      //done();
+      let input = ['4gali', '5.2li', '21kgr']
+      input.forEach(e => assert.equal(convertHandler.getUnit(e), 'invalid unit'))
+      done()
     });  
     
   });
